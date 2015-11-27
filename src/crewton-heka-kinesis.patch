@@ -1,0 +1,24 @@
+From dcb69cd51f3275ffd4ec57aff672fbef9fd086fb Mon Sep 17 00:00:00 2001
+From: Matthew Wedgwood <mw@rmn.com>
+Date: Thu, 26 Nov 2015 19:10:00 -0600
+Subject: [PATCH] Requirements for github.com/crewton/heka-plugins
+
+---
+ cmake/externals.cmake | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/cmake/externals.cmake b/cmake/externals.cmake
+index a00ffc6..c75a673 100644
+--- a/cmake/externals.cmake
++++ b/cmake/externals.cmake
+@@ -208,3 +208,7 @@ if (PLUGIN_LOADER)
+     set(_PLUGIN_LOADER_OUTPUT "${_PLUGIN_LOADER_OUTPUT}\n)\n")
+     file(WRITE "${CMAKE_BINARY_DIR}/plugin_loader.go" ${_PLUGIN_LOADER_OUTPUT})
+ endif()
++
++git_clone(https://github.com/vaughan0/go-ini a98ad7ee00ec53921f08832bc06ecf7fd600e6a1)
++git_clone(https://github.com/aws/aws-sdk-go 90a21481e4509c85ee68b908c72fe4b024311447)
++add_dependencies(aws-sdk-go go-ini)
+-- 
+2.6.3
+
