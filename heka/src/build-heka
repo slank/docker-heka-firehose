@@ -1,0 +1,11 @@
+#!/bin/sh
+START_DIR=$(pwd)
+git clone https://github.com/mozilla-services/heka
+cd heka
+git apply $START_DIR/src/crewton-heka-kinesis.patch
+cp $START_DIR/src/plugin_loader.cmake cmake/
+source build.sh
+make install
+cpack
+mkdir -p /out
+cp -r $START_DIR/heka/build/heka-*-linux-amd64.tar.gz /out/heka-linux-amd64.tar.gz

@@ -1,7 +1,15 @@
-.PHONY: build run
+.PHONY: build clean
 
-build:
-	docker build -t heka-build -f heka-build.Dockerfile .
+build: client/src/heka-linux-amd64.tar.gz
+	make -C client build
 
-run:
-	docker run --rm -v $(PWD)/build:/out heka-build
+client/src/heka-linux-amd64.tar.gz: heka/build/heka-linux-amd64.tar.gz
+	mkdir -p client/src
+	cp heka/build/heka-linux-amd64.tar.gz client/src/
+
+heka/build/heka-linux-amd64.tar.gz:
+	make -C heka build run
+
+clean:
+	make -C heka clean
+	rm -f client/src/heka-linux-amd64.tar.gz

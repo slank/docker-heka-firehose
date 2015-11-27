@@ -1,1 +1,2 @@
-/build
+/heka/build
+/client/src/*.tar.gz

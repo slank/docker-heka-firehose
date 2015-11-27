@@ -1,0 +1,18 @@
+[UdpInput]
+address = "0.0.0.0:12201"
+decoder = "GelfDecoder"
+
+[GelfDecoder]
+type = "SandboxDecoder"
+filename = "lua_decoders/graylog_decoder.lua"
+
+    [GelfDecoder.config]
+    type = "gelf"
+    payload_keep = true
+
+[FirehoseOut]
+type = "KinesisOutput"
+region = "us-east-1"
+stream = "foobar"
+message_matcher = "TRUE"
+encoder = 
